@@ -1,6 +1,7 @@
 // src/index.jsx
 import React from "react";
 import ReactDOM from "react-dom/client"; // <-- import corretto
+import "./index.css";
 import App from "./App";
 import { FavoritesProvider } from "./contexts/FavoritesContext";
 import { ComparatorProvider } from "./contexts/ComparatorContext";
