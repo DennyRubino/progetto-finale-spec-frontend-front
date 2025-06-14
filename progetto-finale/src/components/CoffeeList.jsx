@@ -1,4 +1,3 @@
-// src/components/CoffeeList.jsx
 import { useEffect, useState } from "react";
 import { fetchCoffees } from "../api";
 import CoffeeItem from "./CoffeeItem";
@@ -15,14 +14,22 @@ export default function CoffeeList() {
   const [cats, setCats] = useState([]);
 
   useEffect(() => {
-    fetchCoffees({ search, category, sortBy, order }).then((data) => {
-      setCoffees(data);
-      if (!cats.length) setCats([...new Set(data.map((c) => c.category))]);
-    });
+    fetchCoffees({ search, category, sortBy, order })
+      .then((data) => {
+        console.log("→ fetched coffees:", data);
+        setCoffees(data);
+        if (data.length && !cats.length) {
+          setCats([...new Set(data.map((c) => c.category))]);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        setCoffees([]);
+      });
   }, [search, category, sortBy, order]);
 
   return (
-    <div>
+    <div className="max-w-6xl mx-auto px-6 py-8">
       <SearchFilter value={search} onChange={setSearch} />
       <CategoryFilter
         categories={cats}
@@ -37,9 +44,20 @@ export default function CoffeeList() {
           setOrder(o);
         }}
       />
-      {coffees.map((c) => (
-        <CoffeeItem key={c.id} coffee={c} />
-      ))}
+
+      {coffees.length === 0 ? (
+        <p className="text-center text-gray-600 mt-8">
+          Nessun caffè da mostrare.
+        </p>
+      ) : (
+        <div className="space-y-4">
+          {coffees
+            .filter((c) => c.id != null)
+            .map((c) => (
+              <CoffeeItem key={c.id} coffee={c} />
+            ))}
+        </div>
+      )}
     </div>
   );
 }

@@ -1,4 +1,3 @@
-// src/App.jsx
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import CoffeeList from "./components/CoffeeList";
@@ -10,7 +9,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <Header />
-      <main className="p-4">
+      <main className="pt-16 bg-gray-100 min-h-screen">
         <Routes>
           <Route path="/" element={<CoffeeList />} />
           <Route path="/coffees/:id" element={<CoffeeDetail />} />
