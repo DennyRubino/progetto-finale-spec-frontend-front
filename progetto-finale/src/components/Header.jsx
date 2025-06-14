@@ -8,8 +8,8 @@ export default function Header() {
   const { compareList } = useComparator();
 
   return (
-    <header className="bg-gray-800 text-white p-4 flex justify-between items-center">
-      <h1 className="text-xl font-bold">Coffee Comparator</h1>
+    <header className="bg-orange-950 text-white p-4 flex justify-between  items-center">
+      <h1 className="text-xl font-bold ">Boolspresso</h1>
       <nav className="space-x-4">
         <NavLink
           to="/"

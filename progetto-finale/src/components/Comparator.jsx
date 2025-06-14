@@ -4,12 +4,13 @@ import { useComparator } from "../contexts/ComparatorContext";
 import { fetchCoffeeById } from "../api";
 
 const LABELS_IT = {
-  title: "Nome",
-  category: "Tipo di miscela",
+  title: "Titolo",
+  category: "Categoria",
   origin: "Origine",
   roastLevel: "Tostatura",
   price: "Prezzo",
   description: "Descrizione",
+  // non includiamo imageUrl qui
 };
 
 export default function Comparator() {
@@ -29,11 +30,12 @@ export default function Comparator() {
   if (compareIds.length < 2) {
     return (
       <div className="max-w-6xl mx-auto px-6 mt-20 text-center text-gray-600">
-        Seleziona 2 caffè per confrontarli .
+        Seleziona almeno 2 caffè (max 4) per confrontarli.
       </div>
     );
   }
 
+  // Limita a 4
   const list = items.slice(0, 4);
   const colsClass =
     {
@@ -42,9 +44,9 @@ export default function Comparator() {
       4: "grid-cols-5",
     }[list.length] || "grid-cols-3";
 
-  // Prendo le chiavi da visualizzare
+  // Prendo le chiavi da visualizzare, escludendo id, createdAt, updatedAt e imageUrl
   const keys = Object.keys(list[0] ?? {}).filter(
-    (k) => !["id", "createdAt", "updatedAt"].includes(k)
+    (k) => !["id", "createdAt", "updatedAt", "imageUrl"].includes(k)
   );
 
   return (
@@ -59,27 +61,32 @@ export default function Comparator() {
       <div
         className={`grid ${colsClass} gap-4 bg-white shadow rounded-lg overflow-hidden`}
       >
-        {/* header */}
+        {/* Colonna labels vuota */}
         <div className="bg-gray-100 p-3"></div>
+
+        {/* Header immagini + titolo */}
         {list.map((c) => (
-          <div key={c.id} className="bg-gray-100 p-3 text-center font-semibold">
-            {c.title}
+          <div
+            key={`hdr-${c.id}`}
+            className="bg-gray-100 p-3 flex flex-col items-center"
+          >
+            <img
+              src={c.imageUrl}
+              alt={c.title}
+              className="w-28 h-28 object-cover rounded-lg mb-2"
+            />
           </div>
         ))}
 
-        {/* righe etichetta + valori */}
+        {/* Righe di dati */}
         {keys.map((key) => (
           <React.Fragment key={key}>
-            <div className="p-3 font-medium bg-gray-50">
-              {LABELS_IT[key] ?? key}
-            </div>
+            <div className="p-3 font-medium bg-gray-50">{LABELS_IT[key]}</div>
             {list.map((c) => (
               <div key={`${c.id}-${key}`} className="p-3 text-center">
                 {key === "price"
-                  ? typeof c.price === "number"
-                    ? `€${c.price.toFixed(2)}`
-                    : "—"
-                  : c[key]}
+                  ? `€${(c.price ?? 0).toFixed(2)}`
+                  : c[key] ?? "—"}
               </div>
             ))}
           </React.Fragment>
