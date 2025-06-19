@@ -10,7 +10,7 @@ export function ComparatorProvider({ children }) {
     setCompareList((c) => {
       const exists = c.find((i) => i.id === item.id);
       if (exists) return c.filter((i) => i.id !== item.id);
-      if (c.length >= 2) return c; // massimo 2
+      if (c.length >= 2) return c;
       return [...c, item];
     });
   };

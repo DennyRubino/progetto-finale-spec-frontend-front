@@ -10,7 +10,6 @@ const LABELS_IT = {
   roastLevel: "Tostatura",
   price: "Prezzo",
   description: "Descrizione",
-  // non includiamo imageUrl qui
 };
 
 export default function Comparator() {
@@ -35,7 +34,6 @@ export default function Comparator() {
     );
   }
 
-  // Limita a 4
   const list = items.slice(0, 4);
   const colsClass =
     {
@@ -44,7 +42,6 @@ export default function Comparator() {
       4: "grid-cols-5",
     }[list.length] || "grid-cols-3";
 
-  // Prendo le chiavi da visualizzare, escludendo id, createdAt, updatedAt e imageUrl
   const keys = Object.keys(list[0] ?? {}).filter(
     (k) => !["id", "createdAt", "updatedAt", "imageUrl"].includes(k)
   );
@@ -61,10 +58,8 @@ export default function Comparator() {
       <div
         className={`grid ${colsClass} gap-4 bg-white shadow rounded-lg overflow-hidden`}
       >
-        {/* Colonna labels vuota */}
         <div className="bg-gray-100 p-3"></div>
 
-        {/* Header immagini + titolo */}
         {list.map((c) => (
           <div
             key={`hdr-${c.id}`}
@@ -78,7 +73,6 @@ export default function Comparator() {
           </div>
         ))}
 
-        {/* Righe di dati */}
         {keys.map((key) => (
           <React.Fragment key={key}>
             <div className="p-3 font-medium bg-gray-50">{LABELS_IT[key]}</div>

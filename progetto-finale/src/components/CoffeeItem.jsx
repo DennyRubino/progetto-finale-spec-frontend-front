@@ -30,7 +30,6 @@ export default function CoffeeItem({ coffee }) {
         </div>
 
         <div className="mt-4 flex space-x-2">
-          {/* Preferiti */}
           <button
             onClick={() => (isFav ? removeFav(coffee.id) : addFav(coffee))}
             className="px-3 py-1 border rounded hover:bg-gray-100 transition"
@@ -38,7 +37,6 @@ export default function CoffeeItem({ coffee }) {
             {isFav ? "❤️" : "🤍"}
           </button>
 
-          {/* Confronto */}
           <button
             onClick={() => toggleCompare(coffee)}
             disabled={!inCompare && compareList.length >= 4}

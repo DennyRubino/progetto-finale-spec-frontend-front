@@ -27,7 +27,6 @@ export default function CoffeeDetail() {
   return (
     <div className="max-w-2xl mx-auto px-6 py-8">
       <div className="bg-white rounded-lg shadow p-6 space-y-4">
-        {/* Immagine in evidenza */}
         <img
           src={coffee.imageUrl}
           alt={coffee.title}
