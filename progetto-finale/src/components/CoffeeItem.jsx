@@ -17,7 +17,6 @@ export default function CoffeeItem({ coffee }) {
         className="w-24 h-24 object-cover"
       />
 
-      {/* Contenuto */}
       <div className="flex-1 p-4 flex flex-col justify-between">
         <div>
           <Link

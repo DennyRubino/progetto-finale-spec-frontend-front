@@ -7,7 +7,7 @@ import { useComparator } from "../contexts/ComparatorContext";
 
 export default function CoffeeDetail() {
   const { id } = useParams();
-  const [coffee, setCoffee] = useState(null);
+  const [coffee, setCoffee] = useState("");
   const [error, setError] = useState("");
   const { favorites, addFav, removeFav } = useFavorites();
   const { compareList, toggleCompare } = useComparator();
