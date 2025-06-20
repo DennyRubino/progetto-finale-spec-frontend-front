@@ -29,7 +29,7 @@ export default function Comparator() {
   if (compareIds.length < 2) {
     return (
       <div className="max-w-6xl mx-auto px-6 mt-20 text-center text-gray-600">
-        Seleziona almeno 2 caffè (max 4) per confrontarli.
+        Seleziona 2 caffè per confrontarli.
       </div>
     );
   }
